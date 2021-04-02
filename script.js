@@ -16,6 +16,7 @@ function makePageForEpisodes(episodeList) {
   episodeList.forEach((item) => {
     let episodeDiv = document.createElement("div");
     episodeDiv.setAttribute("class", "episode");
+    episodeDiv.setAttribute('id', `${item.id}`);
     rootElem.appendChild(episodeDiv);
     let pTag = document.createElement("p");
     episodeDiv.appendChild(pTag);
@@ -64,7 +65,7 @@ function dropdownMenu(list) {
     selectTag.appendChild(optionTag);
     selectTag.setAttribute("id", "dropdown");
     selectTag.setAttribute("onchange", "location = this.value");
-    optionTag.setAttribute("value", `${element.name}`);
+    optionTag.setAttribute("value", `#${element.id}`);
     optionTag.innerText = `S${zero(element.season)}E${zero(element.number)} - ${
       element.name
     }`;
