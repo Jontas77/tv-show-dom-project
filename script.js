@@ -25,6 +25,7 @@ function makePageForShows(showList) {
     showCardDiv.appendChild(showTitleDiv);
     showTitleDiv.className = "show-title";
     let ptagTitle = document.createElement("p");
+    ptagTitle.setAttribute('id', 'showName');
     showTitleDiv.appendChild(ptagTitle);
     ptagTitle.innerText = `${name}`;
 
@@ -99,9 +100,9 @@ showsBtn.className = "showBtn";
 showsBtn.innerText = "All Shows";
 
 showsBtn.addEventListener("click", () => {
-  makePageForShows(allShows);
-  dropdownMenuShows(allShows);
+  setup();
 });
+
 // Search Shows
 const searchBar = document.getElementById("searchBar");
 
@@ -243,5 +244,7 @@ selectTag2.addEventListener("change", (e) => {
       console.error("Fetch Error -", err);
     });
 });
+
+
 
 window.onload = setup;
