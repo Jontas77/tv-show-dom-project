@@ -1,14 +1,94 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&family=Ubuntu:wght@400;500;700&display=swap');
+
+
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   margin: 0;
+  background-color: lightslategray;
+  
+}
+
+.showcard {
+  background-color: antiquewhite;
+  box-shadow: 0px 0px 11px 5px rgba(45, 152, 218,1.0);
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 100%;
+  margin: 1rem;
+}
+
+.show-title p {
+  font-size: 2rem;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+}
+
+.content-container {
+  display: flex;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.content-container img {
+  width: 300px;
+}
+
+.img-container {
+  width: 25%;
+  margin-right: 10px;
+}
+
+.summary {
+  width: 48%;
+  margin-right: 10px;
+  background-color: rgba(45, 152, 218, 0.596);
+  padding: 1rem;
+}
+
+.info {
+  position: relative;
+  background-color: rgba(45, 152, 218, 0.596);
+  width: 23%;
+  padding: 1rem;
+}
+
+.info a {
+  position: absolute;
+  top: 220px; 
+  right: 45px;
+  text-decoration: none;
+  color: white;
+  font-family: inherit;
+  background-color: rgb(60,148,139);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.info a:hover {
+  color: lawngreen;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2d98da;
+  padding: 0 30px;
+}
+
+.heading h1 {
+  font-family: 'New Tegomin', serif;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 #root {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .episode {
@@ -16,15 +96,26 @@ body {
   margin: 1rem 0.7%;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.45);
+  padding: 0.625rem;
+  background-color: #fff;
+}
+
+.episode a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.episode a:hover {
+  color: red;
 }
 
 .title {
   border: 1px solid lightgrey;
   border-radius: 10px;
-  padding: 2rem 0px;
-  background-color: rgba(40, 153, 40, 0.877);
+  padding: 1rem 0px;
+  background-color: #2d98da;
   color: #fff;
   cursor: pointer;
 }
@@ -40,44 +131,84 @@ body {
   background-color: rgb(243, 163, 13);
 }
 
-#search-container {
+#dropdown-container {
   position: relative;
-  background-color: rgba(40, 153, 40, 0.877);
-  height: 80px;
+  background-color: #2d98da;
+  height: 5rem;
+}
+
+/* Button */
+.showBtn {
+  position: absolute;
+  top: -23px;
+  left: 25px;
+  outline: none;
+  background-color: rgb(60,148,139);
+  cursor: pointer;
+  font-family: inherit;
+  color: #fff;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.showBtn:hover {
+  color: lawngreen;
+  background-color: lightcoral;
 }
 
 #searchBar {
-  width: 30%;
-  height: 32px;
-  position: absolute;
-  top: 16px;
-  left: 450px;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  padding: 5px 10px;
-  font-size: 1rem;
+  outline: none;
+  width: 45%;
+  height: 2rem;
+  border: 1px solid #cacaca;;
+  border-radius: 30px;
+  padding: 0.3125rem 0.625rem;
+  font-size: 1.1rem;
+  box-shadow: inset 0 1px 2px rgb(10 10 10 / 10%);
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
 }
 
-#search-container::after {
+#dropdown-container::after {
   content: '🔍';
   position: absolute;
-  top: 25px;
-  right: 600px;
+  top: -3.4375rem;
+  right: 4.1875rem;
 }
 
 #count {
   position: absolute;
-  top: 27px;
-  right: 350px;
+  top: 1.6875rem;
+  right: 4.75rem;
   color: white;
   font-weight: bold;
 }
 
-#dropdown {
-  height: 45px;
+
+#dropdownMenu {
+  height: 2.8125rem;
+  width: 30%;
   position: absolute;
-  top: 15px;
-  left: 25px;
-  border-radius: 10px;
+  top: 0.9375rem;
+  left: 31.5625rem;
+  border-radius: 2rem;
   font-size: 1rem;
+  outline: none;
 }
+
+#dropdownShow {
+  height: 2.8125rem;
+  width: 30%;
+  position: absolute;
+  top: 0.9375rem;
+  left: 1.5625rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.dropdown {
+  display: none;
+}
+

@@ -9,14 +9,23 @@
   </head>
 
   <body>
-   <div id="search-container">
-      <input type="text" name="searchBar" id="searchBar" placeholder="Search Episodes"><span id="count"></span>
+  <header>
+      <div class="heading">
+        <h1>TV SHOWS</h1>
+        <input type="text" name="searchBar" id="searchBar" placeholder="Search">
+      </div>
+    </header>
+
+    <div id="dropdown-container">
+     <span id="count"></span>
     </div>
     <div id="root">
     </div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
+
+    <script src="shows.js"></script>
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
