@@ -12,22 +12,33 @@ function makePageForShows(showList) {
   const count = document.getElementById("count");
   count.innerText = `Displaying ${showList.length} show(s)`;
   rootElem.textContent = "";
-  showList.forEach((item) => {
-    const { name, image, summary, rating, genres, status, runtime, url } = item;
+  showList.forEach((show) => {
+    const { name, image, summary, rating, genres, status, runtime, url } = show;
 
     // Div for the card
     let showCardDiv = document.createElement("div");
     rootElem.appendChild(showCardDiv);
     showCardDiv.className = "showcard";
 
-    // Name of show
+    // Name of show and click on title to fetch episodes
     let showTitleDiv = document.createElement("div");
     showCardDiv.appendChild(showTitleDiv);
     showTitleDiv.className = "show-title";
     let ptagTitle = document.createElement("p");
-    ptagTitle.setAttribute('id', 'showName');
     showTitleDiv.appendChild(ptagTitle);
+    ptagTitle.setAttribute("id", "showcardName");
     ptagTitle.innerText = `${name}`;
+    ptagTitle.addEventListener("click", () => {
+      let ptagValue = (ptagTitle.innerText = `${name}`);
+      let result;
+      allShows.forEach((item) => {
+        const { name, id } = item;
+        if (name === ptagValue) {
+          result = id;
+        }
+      });
+      getFetchEpisodes(result);
+    });
 
     // Content of card
     let contentDiv = document.createElement("div");
@@ -94,14 +105,10 @@ function dropdownMenuShows(showList) {
 }
 
 // Button to all Shows
-let showsBtn = document.createElement("button");
-containerDiv.appendChild(showsBtn);
-showsBtn.className = "showBtn";
-showsBtn.innerText = "All Shows";
-
-showsBtn.addEventListener("click", () => {
-  setup();
-});
+// let showsBtn = document.createElement("button");
+// containerDiv.appendChild(showsBtn);
+// showsBtn.className = "showBtn";
+// showsBtn.innerText = "All Shows";
 
 // Search Shows
 const searchBar = document.getElementById("searchBar");
@@ -120,6 +127,65 @@ searchBar.addEventListener("keyup", (e) => {
   makePageForShows(filterShows);
 });
 
+function Refresh() {
+  window.parent.location = window.parent.location.href;
+}
+
+// Fetch data from API
+function getFetchEpisodes(api) {
+  const EPISODES_API = `https://api.tvmaze.com/shows`;
+  fetch(`${EPISODES_API}/${api}/episodes`)
+    .then((response) => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json();
+      } else {
+        console.warn(
+          "Looks like there was a problem. Status Code: " + response.status
+        );
+      }
+    })
+    .then((data) => {
+      selectTag.innerHTML = "";
+      makePageForEpisodes(data);
+      dropdownMenu(data);
+
+      let episodeResult = [];
+      searchBar.addEventListener("keyup", (e) => {
+        let searchString = e.target.value.toLowerCase();
+        episodeResult = data;
+        let filterEpisodes = episodeResult.filter((episode) => {
+          return (
+            episode.name.toLowerCase().includes(searchString) ||
+            episode.summary.toLowerCase().includes(searchString)
+          );
+        });
+        makePageForEpisodes(filterEpisodes);
+      });
+
+      selectTag.addEventListener("change", (e) => {
+        let episodeName = e.target.value;
+        let result = [];
+        let episodes = [];
+        episodes.push(data);
+        // Search Episodes
+        const searchBar2 = document.getElementById("searchBar");
+        let episodeResult = [];
+
+        episodes.forEach((element) => {
+          element.forEach((episode) => {
+            if (episodeName.includes(`${episode.name}`)) {
+              result.push(episode);
+            }
+          });
+        });
+        makePageForEpisodes(result);
+      });
+    })
+    .catch((err) => {
+      console.error("Fetch Error -", err);
+    });
+}
+
 // Episodes
 function zero(num) {
   return num < 10 ? "0" + num : num;
@@ -130,8 +196,8 @@ function makePageForEpisodes(episodeList) {
   const count = document.getElementById("count");
   count.innerText = `Displaying ${episodeList.length} episode(s)`;
   rootElem.innerHTML = "";
-  episodeList.forEach((item) => {
-    const { name, url, image, summary, season, number } = item;
+  episodeList.forEach((episode) => {
+    const { name, url, image, summary, season, number } = episode;
 
     let episodeDiv = document.createElement("div");
     episodeDiv.className = "episode";
@@ -191,60 +257,7 @@ selectTag2.addEventListener("change", (e) => {
       result = item.id;
     }
   });
-
-  const EPISODES_API = `https://api.tvmaze.com/shows`;
-
-  fetch(`${EPISODES_API}/${result}/episodes`)
-    .then((response) => {
-      if (response.status >= 200 && response.status <= 299) {
-        return response.json();
-      } else {
-        console.warn(
-          "Looks like there was a problem. Status Code: " + response.status
-        );
-      }
-    })
-    .then((data) => {
-      // selectTag2.classList.add('dropdown');
-      selectTag.innerHTML = "";
-
-      makePageForEpisodes(data);
-      dropdownMenu(data);
-
-      let episodeResult = [];
-      searchBar.addEventListener("keyup", (e) => {
-        let searchString = e.target.value.toLowerCase();
-        episodeResult = data;
-        let filterEpisodes = episodeResult.filter((episode) => {
-          return (
-            episode.name.toLowerCase().includes(searchString) ||
-            episode.summary.toLowerCase().includes(searchString)
-          );
-        });
-        makePageForEpisodes(filterEpisodes);
-      });
-
-      selectTag.addEventListener("change", (e) => {
-        let episodeName = e.target.value;
-        let result = [];
-        let episodes = [];
-        episodes.push(data);
-
-        episodes.forEach((element) => {
-          element.forEach((episode) => {
-            if (episodeName.includes(`${episode.name}`)) {
-              result.push(episode);
-            }
-          });
-        });
-        makePageForEpisodes(result);
-      });
-    })
-    .catch((err) => {
-      console.error("Fetch Error -", err);
-    });
+  getFetchEpisodes(result);
 });
-
-
 
 window.onload = setup;
