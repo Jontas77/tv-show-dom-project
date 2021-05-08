@@ -66,6 +66,11 @@ body {
   border-radius: 5px;
 }
 
+.info h2 {
+  font-weight: 300;
+  font-size: 2rem;
+}
+
 .info a:hover {
   color: lawngreen;
 }

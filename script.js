@@ -62,14 +62,17 @@ function makePageForShows(showList) {
     let infoDiv = document.createElement("div");
     contentDiv.appendChild(infoDiv);
     infoDiv.className = "info";
+    let heading = document.createElement('h2');
     let ptagRating = document.createElement("p");
     let ptagGenres = document.createElement("p");
     let ptagStatus = document.createElement("p");
     let ptagRuntime = document.createElement("p");
+    infoDiv.appendChild(heading);
     infoDiv.appendChild(ptagRating);
     infoDiv.appendChild(ptagGenres);
     infoDiv.appendChild(ptagStatus);
     infoDiv.appendChild(ptagRuntime);
+    heading.innerText = 'Show Info'
     ptagRating.innerHTML = `<strong>Rating:</strong> ${rating.average}`;
     ptagGenres.innerHTML = `<strong>Genres:</strong> ${genres.join(" | ")}`;
     ptagStatus.innerHTML = `<strong>Status:</strong> ${status}`;
