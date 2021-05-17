@@ -1,4 +1,4 @@
-//You can edit ALL of the code here
+//You can edit ALL of the code here checking if I can edit
 const allShows = getAllShows();
 
 function setup() {
