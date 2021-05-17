@@ -3,17 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <title>TV Show Project | Jonathan Heugh (Jontas77)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <div id="root">
-    </div>
+    <header>
+      <div class="heading">
+        <h1 class="tv-show" onclick="Refresh()">TV SHOWS</h1>
+        <input
+          type="text"
+          name="searchBar"
+          id="searchBar"
+          placeholder="Search"
+        />
+      </div>
+    </header>
+
+    <nav>
+      <div id="dropdown-container">
+        <span id="count"></span>
+      </div>
+    </nav>
+
+    <div id="root"></div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
+
+    <script src="shows.js"></script>
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
